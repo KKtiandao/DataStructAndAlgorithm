@@ -1,3 +1,5 @@
+#ifndef LIST_H 
+#define LIST_H 
 #include "../common/node.h"
 
 template <class T> class List {
@@ -13,11 +15,7 @@ template <class T> class List {
 		};
 		List(Node<T>* a):head(a), tail(a){};
 		
-		bool Erase(Node<T>* a);
 		bool Clear();
-		
-		bool PushFront(Node<T>* a);
-		bool PushBack(Node<T>* a);
 		
 		bool PushFront(T a);
 		bool PushBack(T a);
@@ -32,6 +30,10 @@ template <class T> class List {
 		Node<T>* Tail() const;
 		Node<T>* Head() const;
 	protected:
+		bool PushFront(Node<T>* a);
+		bool PushBack(Node<T>* a);
+		bool Erase(Node<T>* a);
+		
 		Node<T>* head;
 		Node<T>* tail;
 		int size;
@@ -73,6 +75,9 @@ bool List<T>::PushFront(Node<T>* a){
 	std::cout<< __FILE__ << __FUNCTION__ << __LINE__ << std::endl;
 	a->next = head->next;
 	head->next = a;
+	if (size == 0) {
+		tail = head->next;
+	}
 	size++;
 	return true;
 }
@@ -100,10 +105,10 @@ template <class T>
 Node<T>* List<T>::PopBack(){
 	auto result = tail;
 	auto p = head;
-	auto t = p->next;
+	auto t = head->next;
 	while (t != nullptr) {
-		p = p->next;
-	    t = p->next;
+		p = t;
+	    t = t->next;
 		if (t == tail) {
 			p->next = nullptr;
 			tail = p;
@@ -116,10 +121,10 @@ Node<T>* List<T>::PopBack(){
 
 template <class T>
 void List<T>::Dump() const {
-	std::cout<< __FILE__ << __FUNCTION__ << __LINE__ << std::endl;
 	auto pNode = head->next;
     while ( pNode != nullptr ) {
 		pNode->Print();
 		pNode = pNode->next;
 	}	
 }
+#endif

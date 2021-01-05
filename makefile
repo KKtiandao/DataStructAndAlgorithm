@@ -1,22 +1,23 @@
-CPP = $(wildcard *.cpp)
-HPP  = $(wildcard *.h)
-BiList = main.o  bidirectionList.o
-List = main.o  list.o
-DIR = dataStruct/list
-OUTDIR = build
-CC = g++
-CFLAGS = -v -c -std=gnu++0x
-LDFLAGS =
-testList:$(List)
+export OBJS = $(patsubst %.cpp,%.o,$(shell ls *.cpp))
+SUBDIRS = dataStruct
+
+#VPATH = dataStruct:dataStruct/list
+TARGETS = array list # bidirectionList
+MAKE = make
+export OUTDIR = $(shell pwd)/build
+export CC = g++
+export CFLAGS = -v -c -std=gnu++0x
+export LDFLAGS =
+all:$(TARGETS) 
+$(TARGETS): $(SUBDIRS) $(OBJS)
 	test -d $(OUTDIR) || mkdir -p $(OUTDIR)
-	$(CC) -o  $(OUTDIR)/$@ $^ $(LDFLAGS)
-testBiList:$(BiList)
+	$(MAKE) -C $(SUBDIRS) -w
+	$(CC) -o  $(OUTDIR)/$@ $(OUTDIR)/*.o $(LDFLAGS)
+$(OBJS):%.o:%.cpp
 	test -d $(OUTDIR) || mkdir -p $(OUTDIR)
-	$(CC) -o  $(OUTDIR)/$@ $^ $(LDFLAGS)
-$(List):$(CPP) $(DIR)/list.h $(DIR)/list.cpp
-	$(CC) $(CFLAGS) $^
-$(BiList):$(CPP) $(DIR)/bidirectionList.h $(DIR)/bidirectionList.cpp
-	$(CC) $(CFLAGS) $^
+	$(CC) $(CFLAGS) $^ -o $(OUTDIR)/$@
+$(SUBDIRS):
+	$(MAKE) -C $^ -w
 .PHONY:clean
 clean:
-	rm -rf test *.o build 
+	rm -rf build

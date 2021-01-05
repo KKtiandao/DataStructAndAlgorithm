@@ -4,8 +4,8 @@
 void TestList(); 
 
 int main (int argCounts, char* args[]) {
-//	testArray();
-	TestList();	
+	testArray();
+//	TestList();	
 	return 0;
 }
 
@@ -32,5 +32,4 @@ void TestList()
 	delete l->PopBack();
 	l->Dump();
 	delete l;
-	
 }

@@ -63,6 +63,7 @@ Node<T>* BiList<T>::PopFront(){
 		result->pre->next = nullptr;
 		result->pre = nullptr;
 	}
+	List<T>::size--;
 	return result;
 }
 
@@ -73,9 +74,10 @@ Node<T>* BiList<T>::PopBack(){
 	}
 	
 	auto result = List<T>::tail;
-	result->pre = List<T>::tail;
 	result->pre->next = nullptr;
+	List<T>::tail = result->pre;
 	result->pre = nullptr;
+	List<T>::size--;
 	return result;
 }
 
@@ -88,4 +90,3 @@ void BiList<T>::DumpFromBack() const{
 		pNode = pNode->pre;
 	}	
 }
-

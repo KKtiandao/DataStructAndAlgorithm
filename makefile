@@ -4,8 +4,8 @@ BiList = main.o  bidirectionList.o
 Quene = main.o  quene.o
 List = main.o  list.o
 Stack = main.o  stack.o
-DIR = dataStruct/list
-VPATH = dataStruct:dataStruct/array:dataStruct/list:dataStruct/quene : dataStruct/stack
+Tree = main.o  tree.o
+VPATH = dataStruct:dataStruct/array:dataStruct/list:dataStruct/quene : dataStruct/stack:dataStruct/tree
 OUTDIR = build
 CC = g++
 CFLAGS = -v -c -std=gnu++0x
@@ -24,6 +24,9 @@ testQuene:$(Quene)
 testStack:$(Stack)
 	test -d $(OUTDIR) || mkdir -p $(OUTDIR)
 	$(CC) -o  $(OUTDIR)/$@ $^ $(LDFLAGS)
+testTree:$(Tree)
+	test -d $(OUTDIR) || mkdir -p $(OUTDIR)
+	$(CC) -o  $(OUTDIR)/$@ $^ $(LDFLAGS)
 $(List):%.o:%.cpp
 	$(CC) $(CFLAGS) $^
 $(BiList):%.o:%.cpp
@@ -32,7 +35,8 @@ $(Quene):%.o:%.cpp
 	$(CC) $(CFLAGS) $^
 $(Stack):%.o:%.cpp
 	$(CC) $(CFLAGS) $^
-
+$(Tree):%.o:%.cpp
+	$(CC) $(CFLAGS) $^
 .PHONY:clean
 clean:
 	rm -rf test *.o build 

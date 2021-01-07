@@ -2,6 +2,38 @@
 #include "dataStruct/list/bidirectionList.h"
 #include "dataStruct/quene/quene.h"
 #include "dataStruct/stack/stack.h"
+#include "dataStruct/tree/tree.h"
+
+void TestTree() {
+    auto l = new Tree<int>();
+	std::cout<< "size:"<< l->Size() <<std::endl;
+	std::cout<< "high:"<< l->High() <<std::endl;
+	l->Insert(100);
+	l->Insert(130);
+	l->Insert(90 );
+	l->Insert(80 );
+	l->Insert(85 );
+	l->Insert(95 );
+	l->Insert(70 );
+	l->Insert(75 );
+	l->Insert(60 );
+	l->Insert(65 );
+	l->Insert(110);
+	l->Insert(120);
+	l->Insert(145);
+	std::cout<< "size:"<< l->Size() <<std::endl;
+	std::cout<< "high:"<< l->High() <<std::endl;
+	l->GetMaxNode()->Dump();
+	l->GetMinNode()->Dump();
+
+	l->PreOrder();
+	l->InOrder();
+	l->PostOrder();
+	l->DeleteNode(65);
+	l->PreOrder();
+	std::cout<< "size:"<< l->Size() <<std::endl;
+	std::cout<< "high:"<< l->High() <<std::endl;
+}
 
 void TestList() 
 {
@@ -92,7 +124,8 @@ int main (int argCounts, char* args[]) {
 //	testArray();
 //	TestList();	
 //  TestQuene();	
-	TestStack();	
+//	TestStack();	
+	TestTree();	
 	return 0;
 }
 

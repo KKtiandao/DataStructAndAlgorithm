@@ -5,7 +5,7 @@ Quene = main.o  quene.o
 List = main.o  list.o
 Stack = main.o  stack.o
 Tree = main.o  tree.o
-VPATH = dataStruct:dataStruct/array:dataStruct/list:dataStruct/quene : dataStruct/stack:dataStruct/tree
+VPATH = include/dataStruct:include/dataStruct/array:include/dataStruct/list:include/dataStruct/quene : include/dataStruct/stack:include/dataStruct/tree
 OUTDIR = build
 CC = g++
 CFLAGS = -v -c -std=gnu++0x

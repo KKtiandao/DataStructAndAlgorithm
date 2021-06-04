@@ -1,9 +1,13 @@
-#include "dataStruct/array/array.h"
-#include "dataStruct/list/bidirectionList.h"
-#include "dataStruct/quene/quene.h"
-#include "dataStruct/stack/stack.h"
-#include "dataStruct/tree/tree.h"
+#include "include/dataStruct/array/array.h"
+#include "include/dataStruct/list/bidirectionList.h"
+#include "include/dataStruct/quene/quene.h"
+#include "include/dataStruct/stack/stack.h"
+#include "include/dataStruct/tree/tree.h"
 
+#include<random>
+#include<iostream>
+#include<ctime>
+using namespace std;
 void TestTree() {
     auto l = new Tree<int>();
 	std::cout<< "size:"<< l->Size() <<std::endl;
@@ -120,12 +124,24 @@ void TestStack()
 	delete l;
 	
 }
+
+int randomFloat()
+{
+	default_random_engine e(time(0));
+	uniform_real_distribution<double> u(-1.2,3.5);
+	for(int i = 0; i < 10; ++i)
+		cout << u(e) << endl;
+	return 0;
+}
+
 int main (int argCounts, char* args[]) {
 //	testArray();
 //	TestList();	
 //  TestQuene();	
 //	TestStack();	
-	TestTree();	
+//	TestTree();	
+	randomFloat();
 	return 0;
 }
 
+ 
